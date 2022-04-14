@@ -99,7 +99,8 @@ telcom_df.drop(columns=['customer_id'], inplace=True)
 
 # Преобразование признака "total_charges" в числовой тип
 telcom_df.total_charges = pd.to_numeric(telcom_df.total_charges, errors='coerce').fillna(0)
-
+```
+```python
 # Определение зависимостей в количественных признаках, через отображение парных отношений признаков и их распределение
 sns.pairplot(telcom_df, hue='churn', diag_kind='hist', height=2)
 

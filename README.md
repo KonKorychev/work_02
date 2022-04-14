@@ -125,7 +125,7 @@ telcom_df.rename(columns=column_list, inplace=True)
 # Вывод новых признаков
 telcom_df.head()
 ```
-![png](Images/table03.jpg)
+![png](Images/table04.jpg)
 
 ```python
 # Создание цветовой карты для подсвечивания сильных связей
@@ -144,6 +144,7 @@ ax = sns.heatmap(
 plt.show()
 ```
 ![png](Images/chart02.jpg)
+
 В соответствии с полученной матрицей корреляции можно сказать, что в результате применения бинарного кодирования к категориальным значениям, полученный набор признаков избыточен. То есть 6-ть идентичных признаков: **online_security_NoIS**, **online_backup_NoIS**, **device_protection_NoIS**, **tech_support_NoIS**, **streaming_tv_NoIS**, **streaming_movies_NoIS** можно удалить. Они полностью дублируют информацию, отраженную в признаке **internet_service_No**. Также наличие признака **multiple_lines_NoPS** является лишним, поскольку признаки **multiple_lines_NoPS** и **phone_service_Yes** взаимоисключающие.
 
 ```python
@@ -184,7 +185,7 @@ for model in models:
 pd.DataFrame({'Accuracy': scores}, index=['GradientBoostingClassifier', 'XGBClassifier', 
                                           'LGBMClassifier', 'CatBoostClassifier'])
 ```
-![png](Images/table04.jpg)
+![png](Images/table05.jpg)
 
 ##### Модели с оптимизацией гиперпараметров
 ```python
@@ -212,7 +213,7 @@ for model in models:
 pd.DataFrame({'Accuracy': scores}, index=['GradientBoostingClassifier', 'XGBClassifier', 
                                           'LGBMClassifier', 'CatBoostClassifier'])
 ```
-![png](Images/table05.jpg)
+![png](Images/table06.jpg)
 
 ### Результаты и выводы
 Из полученных результатов видно, что для моделей с базовыми настройками лучший результат показал классификатор **LGBMClassifier** с показателем **Accuracy=0.80**. Те же модели, но с оптимизированными гиперпараметрами примерно показывают одинаковую эффективность.

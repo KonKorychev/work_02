@@ -1,6 +1,7 @@
 # Тестирование алгоритмов бустинга
 На основе данных оттока клиентов в компании Telcom провести работу по сравнению алгоритмов бустинга и определить лидера среди классификаторов.
 
+## Подключение библиотек
 ```python
 # Импорт основных библиотек
 import numpy as np
@@ -26,7 +27,7 @@ import seaborn as sns
 # Настройка параметров среды Pandas
 pd.set_option("display.max_columns", 200)
 ```
-### Загрузка исходных данных
+## Загрузка исходных данных
 ```python
 # Загрузка исходных данных об оттоке клиентов в компании Telcom
 telcom_df = pd.read_csv('telco-customer-churn.csv')
@@ -44,7 +45,7 @@ telcom_df.columns = ['customer_id', 'gender', 'senior_citizen', 'partner', 'depe
                      'payment_method', 'monthly_charges', 'total_charges', 'churn']
 ```
 
-### Разведочный анализ данных
+## Разведочный анализ
 ```python
 # Сводная информация о структуре исходных данных
 telcom_df.info()
@@ -153,7 +154,7 @@ telcom_df = telcom_df.drop(columns=['online_security_NoIS', 'online_backup_NoIS'
 # Удаление признака идентичного признаку "phone_service_Yes"
 telcom_df.drop(columns=['multiple_lines_NoPS'], inplace=True)
 ```
-### Предобработка данных
+## Предобработка данных
 ```python
 # Определение тренировочной и контрольной выборок
 X_train, X_test, Y_train, Y_test = train_test_split(
@@ -164,8 +165,8 @@ X_train = MinMaxScaler().fit_transform(X_train)
 X_test = MinMaxScaler().fit_transform(X_test)
 ```
 
-### Построение моделей прогнозирования оттока
-##### Модели с базовыми настройками
+## Построение модели
+### Модели с базовыми настройками
 ```python
 # Определение алгоритмов градиентного бустинга
 models = [GradientBoostingClassifier(random_state=42),
@@ -186,7 +187,7 @@ pd.DataFrame({'Accuracy': scores}, index=['GradientBoostingClassifier', 'XGBClas
 ```
 ![png](Images/table05.jpg)
 
-##### Модели с оптимизацией гиперпараметров
+### Модели с оптимизацией гиперпараметров
 ```python
 # Гиперпараметры модели машинного обучения
 params = {'learning_rate': [0.05, 0.1, 0.3],
@@ -214,7 +215,7 @@ pd.DataFrame({'Accuracy': scores}, index=['GradientBoostingClassifier', 'XGBClas
 ```
 ![png](Images/table06.jpg)
 
-### Результаты и выводы
+## Выводы
 Из полученных результатов видно, что для моделей с базовыми настройками лучший результат показал классификатор **LGBMClassifier** с показателем **Accuracy=0.80**. Те же модели, но с оптимизированными гиперпараметрами примерно показывают одинаковую эффективность.
 
 В данном тесте классификатор **LGBMClassifier** можно считать победителем среди классификаторов "из коробки".
